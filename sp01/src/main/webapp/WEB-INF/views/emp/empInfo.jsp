@@ -35,7 +35,7 @@
 		</div>
 		<div>
 			<button type="button" id="updateBtn">수정</button>
-			<button type="button" id="location.href='empDelete?employeeId=${empInfo.employeeId}'">삭제</button>
+			<button type="button" onclick="location.href='empDelete?employeeId=${empInfo.employeeId}'">삭제</button>
 			<button type="button" onclick="location.href='empList'">목록으로</button>
 		</div>
 	</form>
