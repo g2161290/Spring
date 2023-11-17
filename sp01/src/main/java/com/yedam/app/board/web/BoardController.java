@@ -34,7 +34,7 @@ public class BoardController {
 	@GetMapping("boardInfo")
 	public String getBoardInfo(BoardVO boardVO, Model model) {
 		BoardVO findVO = boardService.getBoard(boardVO);
-		model.addAttribute("BoardVO", findVO);
+		model.addAttribute("BoardInfo", findVO);
 		return "board/boardInfo";
 	}
 	
@@ -47,22 +47,15 @@ public class BoardController {
 	// 등록 - 처리	: URI - boardInsert / RETURN - BoardVO / RETURN - 전체조회 다시 호출
 	@PostMapping("boardInsert")
 	public String insertBoardInfoProcess(BoardVO boardVO) {
-		int bno = boardService.insertBoard(boardVO);
-		
-		String path = null;
-		if(bno > -1) {
-			path = "redirect:boardInfo?bno=" + bno;
-		} else {
-			path = "redirect:boardList";
-		}
-		return path;
+		boardService.insertBoard(boardVO);
+		return "redirect:boardList";
 	}
 	
 	// 수정 - 페이지 : URI - boardUpdate / PARAMETER - BoardVO / RETURN - board/boardUpdate
 	@GetMapping("boardUpdate")
 	public String updateBoardPage(BoardVO boardVO, Model model) {
 		BoardVO findVO = boardService.getBoard(boardVO);
-		model.addAttribute("BoardVO", findVO);
+		model.addAttribute("BoardInfo", findVO);
 		return "board/boardUpdate";
 	}
 	

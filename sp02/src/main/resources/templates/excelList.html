@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<form th:action="@{/excelList}" method="POST" th:object="${excelData}">
+	<button type="submit">Excel</button>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col" th:text="${label.requireId}"></th>
+					<th scope="col" th:text="${label.requireName}"></th>
+					<th scope="col" th:text="${label.requireContent}"></th>
+					<th scope="col" th:text="${label.requireType}"></th>
+					<th scope="col" th:text="${label.entityType}"></th>
+					<th scope="col" th:text="${label.rank}"></th>
+					<th scope="col" th:text="${label.apply}"></th>
+				</tr>
+			</thead>
+			<tbody>				
+				<th:block th:each="data, stat: ${datas}">
+					<tr>
+					<td><input type="text" th:value="${data.requireId}" th:field="${excelData.excelDatas[__${stat.index}__].requireId}"  /></td>
+					<td><input type="text" th:value="${data.requireName}" th:field="${excelData.excelDatas[__${stat.index}__].requireName}"  /></td>
+					<td><input type="text" th:value="${data.requireContent}" th:field="${excelData.excelDatas[__${stat.index}__].requireContent}"  /></td>
+					<td><input type="text" th:value="${data.requireType}" th:field="${excelData.excelDatas[__${stat.index}__].requireType}"  /></td>
+					<td><input type="text" th:value="${data.entityType}" th:field="${excelData.excelDatas[__${stat.index}__].entityType}"  /></td>
+					<td><input type="text" th:value="${data.rank}" th:field="${excelData.excelDatas[__${stat.index}__].rank}"  /></td>
+					<td><input type="text" th:value="${data.apply}" th:field="${excelData.excelDatas[__${stat.index}__].apply}"  /></td>
+					
+					</tr>
+				</th:block>				
+			</tbody>
+		</table>
+	</form>
+</body>
+</html>

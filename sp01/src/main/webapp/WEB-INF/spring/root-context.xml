@@ -8,6 +8,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:component-scan
+		base-package="com.yedam.app">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 	<context:property-placeholder
 		location="classpath:config/*.properties" />
 	<!-- datasource connection pool -->
@@ -25,7 +30,8 @@
 	<!-- mybatis SqlSessionFactory -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
 	</bean>
 
 	<!-- mapper scan -->

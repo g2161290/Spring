@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="daypilot-all.min.js"></script>
+</head>
+<body>
+<!-- Gantt chart control placeholder -->
+<div id="dp"></div>
+
+<!-- DayPilot library -->
+
+<!-- Gantt chart initialization -->
+<script>
+    var dp = new DayPilot.Gantt("dp");
+    dp.startDate = "2021-10-01";
+    dp.days = 90;
+    dp.rowCreateHandling = "Enabled";
+    dp.init();
+    dp.onRowCreate = function(args) {
+
+        var params = {
+            text: args.text,
+            start: dp.startDate,
+            end: dp.startDate.addDays(1)
+        };
+
+        DayPilot.Http.ajax({
+          url: '/api/tasks/create',
+          data: params,
+          success: function (ajax) {
+            var data = ajax.data;
+            dp.tasks.add(data);
+            dp.message("Task created");
+          }
+        });
+    };
+    
+    
+</script>
+</body>
+</html>
